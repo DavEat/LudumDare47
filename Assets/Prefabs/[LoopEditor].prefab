@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3119424431120905619
+--- !u!1 &6658057560772796925
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3119424431120905629}
-  - component: {fileID: 3119424431120905618}
+  - component: {fileID: 6658057560772796927}
+  - component: {fileID: 6658057560772796926}
   m_Layer: 0
-  m_Name: '[GameManager]'
+  m_Name: '[LoopEditor]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3119424431120905629
+--- !u!4 &6658057560772796927
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3119424431120905619}
+  m_GameObject: {fileID: 6658057560772796925}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,18 +31,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3119424431120905618
+--- !u!114 &6658057560772796926
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3119424431120905619}
+  m_GameObject: {fileID: 6658057560772796925}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36b566414d249ca45837b8eac3e362f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a962cd27ceed9a4dba1840fcd24c7da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundLayer:
-    serializedVersion: 2
-    m_Bits: 1024
+  m_prefab_loopPointButton: {fileID: 3762374605925128448, guid: 50a1af2476e98084999fedca98ad9656, type: 3}
+  m_prefab_addLoopPointButton: {fileID: 1826541923949518487, guid: cfaac8193ec53ee4f93ea5b8864f99ff, type: 3}
+  m_LoopPointsButtonContainer: {fileID: 0}
