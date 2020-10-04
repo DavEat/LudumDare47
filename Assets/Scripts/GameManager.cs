@@ -13,16 +13,21 @@ public class GameManager : Singleton<GameManager>
     public int numPickupZone = 1;
     [SerializeField] int increasePickupZone = 1;
 
+    public LayerMask GroundLayer;
+
+    public bool dayEnded = false;
+
+    Vector2 m_screenSize;
+    bool waitscreenNotMoving = false;
+
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(GameManager.inst);
+        DontDestroyOnLoad(ScoreManager.inst);
         StartCoroutine(ReloadGame(0));
 
         m_screenSize = new Vector2(Screen.width, Screen.height);
     }
-
-    Vector2 m_screenSize;
-    bool waitscreenNotMoving = false;
 
     void Update()
     {
@@ -40,17 +45,24 @@ public class GameManager : Singleton<GameManager>
             LoopEditor.inst.Recreate();
         }
     }
-
+    public void EndDay()
+    {
+        dayEnded = true;
+        PlayerPosition.inst.gameObject.SetActive(false);
+        ScoreManager.inst.DisplayScore(currentDay >= maxDay);
+    }
+    public void Replay()
+    {
+        ScoreManager.inst.ResetCurrentDay();
+        StartCoroutine(ReloadGame(.1f));
+    }
     public void NextDay()
     {
         currentDay++;
         if (currentDay > maxDay)
         {
             Debug.Log("end game");
-
-            Destroy(gameObject);
-            SceneManager.LoadScene(0);
-
+            RestartFromDayOne();
             return;
         }
 
@@ -59,13 +71,16 @@ public class GameManager : Singleton<GameManager>
 
         StartCoroutine(ReloadGame(.1f));
     }
-
+    public void RestartFromDayOne()
+    {
+        Destroy(gameObject);
+        SceneManager.LoadScene(0);
+    }
     IEnumerator ReloadGame(float time)
     {
+        dayEnded = false;
         SceneManager.LoadScene(1);
         yield return new WaitForSeconds(time);
         PostPickupZone.inst.Activate();
     }
-
-    public LayerMask GroundLayer;
 }

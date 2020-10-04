@@ -69,7 +69,7 @@ public class DeliveryManager : Singleton<DeliveryManager>
         {
             Debug.Log("deliveries competed");
 
-            GameManager.inst.NextDay();
+            GameManager.inst.EndDay();
         }
     }
 }

@@ -13,10 +13,13 @@ public class LoopEditor : Singleton<LoopEditor>
     [SerializeField] LoopPointButton m_prefab_loopPointButton = null;
     [SerializeField] LoopPointButton m_prefab_addLoopPointButton = null;
     [SerializeField] RectTransform m_LoopPointsButtonContainer = null;
+    [SerializeField] RectTransform m_pinTargetPos = null;
 
     int m_maxLoopPoint = 4;
 
     Transform m_transform = null;
+
+    [HideInInspector] public LoopPointButton PointSelected = null;
 
     void Start()
     {
@@ -54,6 +57,12 @@ public class LoopEditor : Singleton<LoopEditor>
             Instantiate(m_prefab_addLoopPointButton, m_LoopPointsButtonContainer).Init(lastPoint, position0, true, firstButton);
         }
         lastButton.SetAngle(firstButton);
+    }
+    public void SetPinPosition(Vector3 position)
+    {
+        Vector2 screenPoint = Camera.main.WorldToScreenPoint(position);
+        m_pinTargetPos.position = screenPoint;
+        m_pinTargetPos.sizeDelta = (64 - (Camera.main.transform.position - position).magnitude) * Vector2.one;
     }
     public void Recreate()
     {

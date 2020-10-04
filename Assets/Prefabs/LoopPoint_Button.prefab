@@ -284,3 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc3f86f96dd35647aa8ebc3e556d7ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 5586730445600230782}
+  - {fileID: 7608424238492657094}
+  - {fileID: 7648466525430828392}
+  m_targetColor: {r: 0.43120328, g: 0.8123176, b: 0.9622642, a: 1}

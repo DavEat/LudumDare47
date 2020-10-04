@@ -5,6 +5,7 @@ using UnityEngine;
 public class LoopPoint : MonoBehaviour
 {
     Transform m_transform = null;
+    public bool isTarget = false;
 
     void Awake()
     {

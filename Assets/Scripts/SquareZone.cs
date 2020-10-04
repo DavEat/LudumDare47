@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SquareZone : MonoBehaviour
 {
-    protected Vector2 m_corner0;
-    protected Vector2 m_corner1;
+    protected Vector3 m_corner0;
+    protected Vector3 m_corner1;
 
     [SerializeField] protected SpriteRenderer sprite = null;
 
@@ -23,22 +23,25 @@ public class SquareZone : MonoBehaviour
     {
         m_transform = GetComponent<Transform>();
 
-        m_corner0 = new Vector2(m_transform.localScale.x *  sprite.size.x / 2 + m_transform.position.x, m_transform.localScale.y *  sprite.size.y / 2 + m_transform.position.z);
-        m_corner1 = new Vector2(m_transform.localScale.x * -sprite.size.x / 2 + m_transform.position.x, m_transform.localScale.y * -sprite.size.y / 2 + m_transform.position.z);
+        m_corner0 = transform.GetChild(1).position;
+        m_corner1 = transform.GetChild(0).position;
 
         gameObject.SetActive(false);
     }
     protected virtual bool Inside(Vector3 position)
     {
-        return m_corner0.x > position.x && m_corner1.x < position.x && m_corner0.y > position.z && m_corner1.y < position.z;
+        return m_corner0.x > position.x && m_corner1.x < position.x && m_corner0.z > position.z && m_corner1.z < position.z 
+            || m_corner0.x < position.x && m_corner1.x > position.x && m_corner0.z > position.z && m_corner1.z < position.z
+            || m_corner0.x > position.x && m_corner1.x < position.x && m_corner0.z < position.z && m_corner1.z > position.z
+            || m_corner0.x < position.x && m_corner1.x > position.x && m_corner0.z < position.z && m_corner1.z > position.z;
     }
     #if UNITY_EDITOR
     protected virtual void OnDrawGizmos()
     {
         if (m_transform == null) return;
 
-        Gizmos.DrawCube(new Vector3(m_corner0.x, 0, m_corner0.y), transform.localScale * .1f);
-        Gizmos.DrawCube(new Vector3(m_corner1.x, 0, m_corner1.y), transform.localScale * .1f);
+        Gizmos.DrawCube(new Vector3(m_corner0.x, 0, m_corner0.z), transform.localScale * .1f);
+        Gizmos.DrawCube(new Vector3(m_corner1.x, 0, m_corner1.z), transform.localScale * .1f);
     }
     #endif
 }

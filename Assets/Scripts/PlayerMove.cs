@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     Vector3 m_targetPosition = Vector3.zero;
     NavMeshAgent m_agent = null;
 
-    [SerializeField] float m_nextPointDst = 1f;
+    [SerializeField] float m_nextPointDst = .1f;
 
     Transform m_transform = null;
     public float totalDistance = 0;
@@ -33,10 +33,11 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if ((m_targetPosition - transform.position).sqrMagnitude < m_nextPointDst * m_nextPointDst)
+        if ((m_targetPosition - transform.position).sqrMagnitude < m_nextPointDst /*|| m_agent.velocity.sqrMagnitude < m_nextPointDst*/)
         {
-            m_targetPosition = PlayerLoop.inst.GetNextPoint();
+            m_targetPosition = PlayerLoop.inst.GetNextPoint(true);
             m_agent.SetDestination(m_targetPosition);
+            LoopEditor.inst.SetPinPosition(m_targetPosition);
         }
         UpdateTravelDst();
 
@@ -52,10 +53,15 @@ public class PlayerMove : MonoBehaviour
     {
         m_targetPosition = PlayerLoop.inst.GetCurrentPoint();
         m_agent.SetDestination(m_targetPosition);
+        LoopEditor.inst.SetPinPosition(m_targetPosition);
     }
     void UpdateTravelDst()
     {
-        totalDistance += (m_transform.position - m_lastPosition).magnitude;
+        float dst = (m_transform.position - m_lastPosition).magnitude;
+        totalDistance += dst;
         m_lastPosition = m_transform.position;
+
+        ScoreManager.inst.AddDst(dst);
+        ScoreManager.inst.AddTime(Time.deltaTime);
     }
 }

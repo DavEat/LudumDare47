@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3119424431120905629}
   - component: {fileID: 3119424431120905618}
+  - component: {fileID: 1994182201584787669}
   m_Layer: 0
   m_Name: '[GameManager]'
   m_TagString: Untagged
@@ -43,6 +44,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b566414d249ca45837b8eac3e362f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentDay: 1
+  maxDay: 3
+  numDeliveryZone: 8
+  increaseDeliveryZone: 1.6
+  numPickupZone: 1
+  increasePickupZone: 1
   GroundLayer:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &1994182201584787669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119424431120905619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acc0f6bf58699294ca51f2a024e54dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

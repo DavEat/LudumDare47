@@ -26,10 +26,14 @@ public class PlayerLoop : Singleton<PlayerLoop>
     {
         return m_points[m_currentIndex].GetPosition();
     }
-    public Vector3 GetNextPoint()
+    public Vector3 GetNextPoint(bool isTarget)
     {
+        if (isTarget) m_points[m_currentIndex].isTarget = false;
+
         if (++m_currentIndex >= m_size)
             m_currentIndex = 0;
+
+        if (isTarget) m_points[m_currentIndex].isTarget = true;
 
         return m_points[m_currentIndex].GetPosition();
     }

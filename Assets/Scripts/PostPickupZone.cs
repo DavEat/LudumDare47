@@ -18,7 +18,7 @@ public class PostPickupZone : SquareZone
     }
     void Update()
     {
-        if (!m_pickedup && Inside(PlayerPosition.inst.position))
+        if (!m_pickedup && Inside(PlayerPosition.inst.frontWheel))
         {
             Debug.Log("Load Post");
             DeliveryManager.inst.InitADay();

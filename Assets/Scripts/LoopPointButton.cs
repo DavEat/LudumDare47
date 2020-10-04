@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LoopPointButton : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class LoopPointButton : MonoBehaviour
     float m_defaultAnchorArrow = 128;
 
     LoopPointButton m_target = null;
+
+    [SerializeField] Image[] sprites = null;
+    [SerializeField] Color m_targetColor = Color.green;
 
     public void Init(LoopPoint point, Vector3 position, bool addbutton = false, LoopPointButton target = null)
     {
@@ -72,6 +76,11 @@ public class LoopPointButton : MonoBehaviour
     }
     void Update()
     {
+        for (int i = 0; i < sprites.Length; i++)
+        {
+            sprites[i].color = m_loopPoint.isTarget ? m_targetColor: Color.white;
+        }
+
         Vector2 mouse = Input.mousePosition;
 
         if (Input.GetMouseButtonUp(0))
@@ -86,13 +95,15 @@ public class LoopPointButton : MonoBehaviour
             {
                 //End drag
                 Debug.Log("EndDrag");
+                ScoreManager.inst.AddInteraction();
+                if (LoopEditor.inst.PointSelected == this) LoopEditor.inst.PointSelected = null;
                 if (LoopEditor.inst.endMove != null) LoopEditor.inst.endMove.Invoke();
             }
             else
             {
                 return;
                 //Click
-                Debug.Log("Click");
+                /*Debug.Log("Click");
                 if (m_addbutton)
                 {
                     RaycastHit hit;
@@ -110,7 +121,7 @@ public class LoopPointButton : MonoBehaviour
                     PlayerLoop.inst.RemovePoint(m_loopPoint);
                 }
                 if (LoopEditor.inst.endMove != null) LoopEditor.inst.endMove.Invoke();
-                LoopEditor.inst.Recreate();
+                LoopEditor.inst.Recreate();*/
             }
         }
         else if (Input.GetMouseButtonDown(0))
@@ -131,9 +142,11 @@ public class LoopPointButton : MonoBehaviour
                 if (m_addbutton) return;
 
                 if (!RectTransformUtility.RectangleContainsScreenPoint(CanvasManager.loopRect, mouse)) return;
+                if (LoopEditor.inst.PointSelected != null && LoopEditor.inst.PointSelected != this) return;
 
                 //Start drag
                 Debug.Log("StartDrag");
+                LoopEditor.inst.PointSelected = this;
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(mouse);
                 if (Physics.Raycast(ray, out hit, 1000, GameManager.inst.GroundLayer))
