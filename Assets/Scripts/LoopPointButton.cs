@@ -46,7 +46,8 @@ public class LoopPointButton : MonoBehaviour
     }
     void SetPosition(Vector3 position)
     {
-        m_rect.anchoredPosition = Camera.main.WorldToScreenPoint(position);
+        Vector2 screenPoint = Camera.main.WorldToScreenPoint(position);
+        m_rect.position = screenPoint;
         m_rect.sizeDelta = (m_defaultSize - (Camera.main.transform.position - position).magnitude) * Vector2.one;
     }
     public void SetAngle(LoopPointButton target)
@@ -67,7 +68,7 @@ public class LoopPointButton : MonoBehaviour
     public void UpdateSize()
     {
         RectTransform line = m_rect.GetChild(1).GetComponent<RectTransform>();
-        line.sizeDelta = new Vector2(line.sizeDelta.x, (m_target.m_rect.position - line.position).magnitude - (line.position - m_rect.position).magnitude * .5f);
+        line.sizeDelta = new Vector2(line.sizeDelta.x, (m_target.m_rect.position - line.position).magnitude - (line.position - m_rect.position).magnitude * .4f);
     }
     void Update()
     {
@@ -94,11 +95,11 @@ public class LoopPointButton : MonoBehaviour
                 if (m_addbutton)
                 {
                     RaycastHit hit;
-                    Ray ray = Camera.main.ScreenPointToRay(m_rect.anchoredPosition);
+                    Ray ray = Camera.main.ScreenPointToRay(m_rect.position);
                     if (Physics.Raycast(ray, out hit, 1000, GameManager.inst.GroundLayer))
                     {
                         PlayerLoop.inst.AddPoint(m_loopPoint, hit.point);
-                        if (LoopEditor.inst.endMove != null) LoopEditor.inst.endMove.Invoke();
+                        //if (LoopEditor.inst.endMove != null) LoopEditor.inst.endMove.Invoke();
                     }
                 }
                 else
@@ -107,6 +108,7 @@ public class LoopPointButton : MonoBehaviour
                     ResetButton();
                     PlayerLoop.inst.RemovePoint(m_loopPoint);
                 }
+                if (LoopEditor.inst.endMove != null) LoopEditor.inst.endMove.Invoke();
                 LoopEditor.inst.Recreate();
             }
         }

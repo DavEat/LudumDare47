@@ -17,6 +17,28 @@ public class GameManager : Singleton<GameManager>
     {
         DontDestroyOnLoad(gameObject);
         StartCoroutine(ReloadGame(0));
+
+        m_screenSize = new Vector2(Screen.width, Screen.height);
+    }
+
+    Vector2 m_screenSize;
+    bool waitscreenNotMoving = false;
+
+    void Update()
+    {
+        Vector2 screenSize = new Vector2(Screen.width, Screen.height);
+        if (m_screenSize != screenSize)
+        {
+            m_screenSize = screenSize;
+            waitscreenNotMoving = true;
+            //LoopEditor.inst.Recreate();
+            Debug.Log("resize");
+        }
+        else if (waitscreenNotMoving)
+        {
+            waitscreenNotMoving = false;
+            LoopEditor.inst.Recreate();
+        }
     }
 
     public void NextDay()
@@ -42,7 +64,7 @@ public class GameManager : Singleton<GameManager>
     {
         SceneManager.LoadScene(1);
         yield return new WaitForSeconds(time);
-        DeliveryManager.inst.InitADay();
+        PostPickupZone.inst.Activate();
     }
 
     public LayerMask GroundLayer;

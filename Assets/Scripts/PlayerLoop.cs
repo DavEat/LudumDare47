@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using TreeEditor;
 using UnityEngine;
 
 public class PlayerLoop : Singleton<PlayerLoop>
