@@ -14,6 +14,8 @@ public class LoopEditor : Singleton<LoopEditor>
     [SerializeField] LoopPointButton m_prefab_addLoopPointButton = null;
     [SerializeField] RectTransform m_LoopPointsButtonContainer = null;
 
+    int m_maxLoopPoint = 4;
+
     Transform m_transform = null;
 
     void Start()
@@ -33,7 +35,7 @@ public class LoopEditor : Singleton<LoopEditor>
             LoopPointButton b = Instantiate(m_prefab_loopPointButton, m_LoopPointsButtonContainer);
             b.Init(lp, lp.GetPosition());
             
-            if (lastPoint != null && PlayerLoop.inst.GetSize() < 5)
+            if (lastPoint != null && PlayerLoop.inst.GetSize() < m_maxLoopPoint)
             {
                 Vector3 position = (lastPoint.GetPosition() - lp.GetPosition()) * .5f + lp.GetPosition();
                 Instantiate(m_prefab_addLoopPointButton, m_LoopPointsButtonContainer).Init(lastPoint, position, true, b);
@@ -46,7 +48,7 @@ public class LoopEditor : Singleton<LoopEditor>
             lastButton = b;
             index++;
         }
-        if (PlayerLoop.inst.GetSize() < 5)
+        if (PlayerLoop.inst.GetSize() < m_maxLoopPoint)
         {
             Vector3 position0 = (lastPoint.GetPosition() - PlayerLoop.inst.GetPointAt(0).GetPosition()) * .5f + PlayerLoop.inst.GetPointAt(0).GetPosition();
             Instantiate(m_prefab_addLoopPointButton, m_LoopPointsButtonContainer).Init(lastPoint, position0, true, firstButton);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class PlayerMove : MonoBehaviour
     Transform m_transform = null;
     public float totalDistance = 0;
     Vector3 m_lastPosition;
+
+    [SerializeField] float m_baseAgentSpeed = 100;
+    [SerializeField] float m_dirtMultiplier = .5f;
+    int m_dirtMaskId = 8;
 
     void Start()
     {
@@ -34,6 +39,14 @@ public class PlayerMove : MonoBehaviour
             m_agent.SetDestination(m_targetPosition);
         }
         UpdateTravelDst();
+
+        NavMeshHit navMeshHit;
+        m_agent.SamplePathPosition(NavMesh.AllAreas, 0f, out navMeshHit);
+        if (navMeshHit.mask == m_dirtMaskId)
+        {
+            m_agent.speed = m_baseAgentSpeed * m_dirtMultiplier;
+        }
+        else m_agent.speed = m_baseAgentSpeed;
     }
     public void SetDestiantion()
     {

@@ -90,6 +90,7 @@ public class LoopPointButton : MonoBehaviour
             }
             else
             {
+                return;
                 //Click
                 Debug.Log("Click");
                 if (m_addbutton)
@@ -128,6 +129,8 @@ public class LoopPointButton : MonoBehaviour
             if (m_down && (mouse - m_downAtPosition).sqrMagnitude > .1f)
             {
                 if (m_addbutton) return;
+
+                if (!RectTransformUtility.RectangleContainsScreenPoint(CanvasManager.loopRect, mouse)) return;
 
                 //Start drag
                 Debug.Log("StartDrag");
