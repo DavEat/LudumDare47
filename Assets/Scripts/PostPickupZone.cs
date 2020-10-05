@@ -23,6 +23,7 @@ public class PostPickupZone : SquareZone
             Debug.Log("Load Post");
             DeliveryManager.inst.InitADay();
             gameObject.SetActive(false);
+            SoundManager.inst.PlayPickUpPaper();
         }
     }
 }

@@ -43,3 +43,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c0f69a1618f98243bca8498bf8fb40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deliveryZones:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_prefab_paper: {fileID: 5233924839928462897, guid: 6df5891f2d182b14587bd507a40ef522, type: 3}

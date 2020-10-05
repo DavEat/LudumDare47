@@ -73,5 +73,6 @@ public class LoopEditor : Singleton<LoopEditor>
         pointMove = null;
 
         SpawnAllButtons();
+        LoopEditor.inst.endMove.Invoke();
     }
 }

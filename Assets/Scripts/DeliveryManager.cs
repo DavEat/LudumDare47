@@ -11,6 +11,8 @@ public class DeliveryManager : Singleton<DeliveryManager>
 
     int m_pickupGenerated = 0;
 
+    [SerializeField] Paper m_prefab_paper = null;
+
     public void InitADay()
     {
         m_pickupGenerated = 0;
@@ -71,5 +73,10 @@ public class DeliveryManager : Singleton<DeliveryManager>
 
             GameManager.inst.EndDay();
         }
+    }
+    public void DeliveryCompleted(Vector3 position)
+    {
+        DeliveryCompleted();
+        Instantiate(m_prefab_paper, PlayerPosition.inst.trowFrom, Quaternion.identity, transform).Init(position);
     }
 }

@@ -48,7 +48,6 @@ public class GameManager : Singleton<GameManager>
     public void EndDay()
     {
         dayEnded = true;
-        PlayerPosition.inst.gameObject.SetActive(false);
         ScoreManager.inst.DisplayScore(currentDay >= maxDay);
     }
     public void Replay()

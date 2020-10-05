@@ -10,8 +10,8 @@ public class ScoreManager : Singleton<ScoreManager>
     Score[] needScoreForStar = new Score[]
     {
         new Score(90, 48, 16),
-        new Score(120, 120, 30),
-        new Score(120, 120, 30)
+        new Score(95, 48, 16),
+        new Score(100, 52, 16)
     };
 
     void Awake()

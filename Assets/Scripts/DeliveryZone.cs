@@ -7,6 +7,8 @@ public class DeliveryZone : SquareZone
     bool m_delivered = true;
     bool m_pickup = false;
 
+    [SerializeField] Transform m_deliveryPoint = null;
+
     public override void Activate(bool pickup = false)
     {
         DeliveryManager.inst.NewDeliveryPoint();
@@ -24,9 +26,14 @@ public class DeliveryZone : SquareZone
             if (m_pickup)
             {
                 DeliveryManager.inst.FindDeliveryForPickup();
+                SoundManager.inst.PlayPickUpPaper();
+                DeliveryManager.inst.DeliveryCompleted();
             }
-
-            DeliveryManager.inst.DeliveryCompleted();
+            else
+            {
+                SoundManager.inst.PlayFlyPaper();
+                DeliveryManager.inst.DeliveryCompleted(m_deliveryPoint.position);
+            }
             gameObject.SetActive(false);
         }
     }

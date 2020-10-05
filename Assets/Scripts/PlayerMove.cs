@@ -46,8 +46,13 @@ public class PlayerMove : MonoBehaviour
         if (navMeshHit.mask == m_dirtMaskId)
         {
             m_agent.speed = m_baseAgentSpeed * m_dirtMultiplier;
+            SoundManager.inst.PlayMud();
         }
-        else m_agent.speed = m_baseAgentSpeed;
+        else
+        {
+            SoundManager.inst.StopMud();
+            m_agent.speed = m_baseAgentSpeed;
+        }
     }
     public void SetDestiantion()
     {

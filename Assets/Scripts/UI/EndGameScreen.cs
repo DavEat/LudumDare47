@@ -11,5 +11,6 @@ public class EndGameScreen : MonoBehaviour
     public void Restart()
     {
         GameManager.inst.NextDay();
+        SoundManager.inst.ClickButton();
     }
 }

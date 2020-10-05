@@ -61,13 +61,16 @@ public class ScoreScreen : MonoBehaviour
     public void Replay()
     {
         GameManager.inst.Replay();
+        SoundManager.inst.ClickButton();
     }
     public void Next()
     {
         GameManager.inst.NextDay();
+        SoundManager.inst.ClickButton();
     }
     public void End()
     {
         CanvasManager.inst.Display_EndGameScreen();
+        SoundManager.inst.ClickButton();
     }
 }
